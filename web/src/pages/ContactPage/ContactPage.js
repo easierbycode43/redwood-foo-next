@@ -4,6 +4,8 @@ import BlogLayout from 'src/layouts/BlogLayout/BlogLayout'
 import { Form, Label, TextField, Submit } from '@redwoodjs/forms'
 
 const ContactPage = () => {
+  const onSubmit = (data) => console.log(data)
+
   return (
     <BlogLayout>
       <MetaTags
@@ -14,7 +16,7 @@ const ContactPage = () => {
       />
 
       <h1>ContactPage</h1>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Label name="name" />
         <TextField name="name" />
 
