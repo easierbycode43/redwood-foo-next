@@ -9,6 +9,7 @@ import {
   TextField,
   Submit,
 } from '@redwoodjs/forms'
+import { useForm } from 'react-hook-form'
 
 const CREATE_CONTACT = gql`
   mutation CreateContactMutation($input: CreateContactInput!) {
@@ -19,7 +20,14 @@ const CREATE_CONTACT = gql`
 `
 
 const ContactPage = () => {
-  const [create, { loading }] = useMutation(CREATE_CONTACT)
+  const formMethods = useForm()
+
+  const [create, { loading }] = useMutation(CREATE_CONTACT, {
+    onCompleted: () => {
+      formMethods.reset()
+      alert('Saved!')
+    },
+  })
 
   const onSubmit = (data) => create({ variables: { input: data } })
 
@@ -35,7 +43,11 @@ const ContactPage = () => {
       <h1>ContactPage</h1>
 
       {/* config prop is passed straight in to react-hook-form's useForm and can so take all the available config options */}
-      <Form onSubmit={onSubmit} config={{ mode: 'onBlur' }}>
+      <Form
+        onSubmit={onSubmit}
+        config={{ mode: 'onBlur' }}
+        formMethods={formMethods}
+      >
         <Label errorClassName="error" name="name" />
         <TextField
           name="name"
