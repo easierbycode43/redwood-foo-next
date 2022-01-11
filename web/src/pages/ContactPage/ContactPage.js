@@ -1,7 +1,14 @@
 // import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import BlogLayout from 'src/layouts/BlogLayout/BlogLayout'
-import { Form, Label, TextAreaField, TextField, Submit } from '@redwoodjs/forms'
+import {
+  FieldError,
+  Form,
+  Label,
+  TextAreaField,
+  TextField,
+  Submit,
+} from '@redwoodjs/forms'
 
 const ContactPage = () => {
   const onSubmit = (data) => console.log(data)
@@ -16,27 +23,31 @@ const ContactPage = () => {
       />
 
       <h1>ContactPage</h1>
+
       <Form onSubmit={onSubmit}>
-        <Label name="name" />
+        <Label errorClassName="error" name="name" />
         <TextField
           name="name"
           errorClassName="error"
           validation={{ required: true }}
         />
+        <FieldError className="error" name="name" />
 
-        <Label name="email" />
+        <Label errorClassName="error" name="email" />
         <TextField
           name="email"
           errorClassName="error"
           validation={{ required: true, pattern: { value: /[^@]+@[^.]+\..+/ } }}
         />
+        <FieldError className="error" name="email" />
 
-        <Label name="message" />
+        <Label errorClassName="error" name="message" />
         <TextAreaField
           name="message"
           errorClassName="error"
           validation={{ required: true }}
         />
+        <FieldError className="error" name="message" />
 
         <Submit>Save</Submit>
       </Form>

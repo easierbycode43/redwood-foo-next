@@ -12,6 +12,6 @@ input.error, textarea.error {
   color: red;
 }
 
-label.error {
+label.error, span.error {
   color: red;
 }
