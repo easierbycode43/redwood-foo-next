@@ -24,7 +24,8 @@ const ContactPage = () => {
 
       <h1>ContactPage</h1>
 
-      <Form onSubmit={onSubmit}>
+      {/* config prop is passed straight in to react-hook-form's useForm and can so take all the available config options */}
+      <Form onSubmit={onSubmit} config={{ mode: 'onBlur' }}>
         <Label errorClassName="error" name="name" />
         <TextField
           name="name"
@@ -47,7 +48,11 @@ const ContactPage = () => {
           errorClassName="error"
           validation={{ required: true }}
         />
-        <FieldError className="error" name="message" />
+        <FieldError
+          style={{ display: 'block' }}
+          className="error"
+          name="message"
+        />
 
         <Submit>Save</Submit>
       </Form>
