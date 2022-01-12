@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c919afd9-acca-4480-9af1-08a88b223582/deploy-status)](https://app.netlify.com/sites/elastic-bhaskara-d39793/deploys)
+
 # Redwood
 
 > **NOTICE:** RedwoodJS is very close to a stable version 1.0. In the last two years,
