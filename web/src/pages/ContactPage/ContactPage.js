@@ -4,6 +4,7 @@ import BlogLayout from 'src/layouts/BlogLayout/BlogLayout'
 import {
   FieldError,
   Form,
+  FormError,
   Label,
   TextAreaField,
   TextField,
@@ -22,7 +23,7 @@ const CREATE_CONTACT = gql`
 const ContactPage = () => {
   const formMethods = useForm()
 
-  const [create, { loading }] = useMutation(CREATE_CONTACT, {
+  const [create, { error, loading }] = useMutation(CREATE_CONTACT, {
     onCompleted: () => {
       formMethods.reset()
       alert('Saved!')
@@ -47,8 +48,15 @@ const ContactPage = () => {
         onSubmit={onSubmit}
         config={{ mode: 'onBlur' }}
         formMethods={formMethods}
+        error={error}
       >
-        <Label errorClassName="error" name="name" />
+        <FormError
+          error={error}
+          wrapperStyle={{ color: 'red', backgroundColor: 'lavenderblush' }}
+        />
+        <Label errorClassName="error" name="name">
+          Your Name
+        </Label>
         <TextField
           name="name"
           errorClassName="error"
@@ -56,15 +64,20 @@ const ContactPage = () => {
         />
         <FieldError className="error" name="name" />
 
-        <Label errorClassName="error" name="email" />
+        <Label errorClassName="error" name="email">
+          Your Email
+        </Label>
         <TextField
           name="email"
           errorClassName="error"
-          validation={{ required: true, pattern: { value: /[^@]+@[^.]+\..+/ } }}
+          // validation={{ required: true, pattern: { value: /[^@]+@[^.]+\..+/ } }}
+          validation={{ required: true }}
         />
         <FieldError className="error" name="email" />
 
-        <Label errorClassName="error" name="message" />
+        <Label errorClassName="error" name="message">
+          Your Message
+        </Label>
         <TextAreaField
           name="message"
           errorClassName="error"
