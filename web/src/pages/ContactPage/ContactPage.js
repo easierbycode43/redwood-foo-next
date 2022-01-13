@@ -11,6 +11,7 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 import { useForm } from 'react-hook-form'
+import { toast, Toaster } from '@redwoodjs/web/toast'
 
 const CREATE_CONTACT = gql`
   mutation CreateContactMutation($input: CreateContactInput!) {
@@ -26,7 +27,10 @@ const ContactPage = () => {
   const [create, { error, loading }] = useMutation(CREATE_CONTACT, {
     onCompleted: () => {
       formMethods.reset()
-      alert('Saved!')
+      toast.success('Saved!')
+    },
+    onError: (err) => {
+      toast.error(err.message)
     },
   })
 
@@ -42,6 +46,8 @@ const ContactPage = () => {
       />
 
       <h1>ContactPage</h1>
+
+      <Toaster />
 
       {/* config prop is passed straight in to react-hook-form's useForm and can so take all the available config options */}
       <Form
